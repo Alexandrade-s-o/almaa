@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ALMA</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta http-equiv="refresh" content="0;url=/alma-demo/">
+  <link rel="canonical" href="/alma-demo/">
+  <script>
+    (function () {
+      var p = '/alma-demo/';
+      var t = location.search || '';
+      var h = location.hash || '';
+      if (location.pathname !== p && location.pathname !== p.slice(0, -1)) {
+        location.replace(p + t + h);
+      }
+    })();
+  </script>
+</head>
+<body style="font-family: system-ui, sans-serif; padding: 2rem; text-align: center; color: #085041; background: #f5f4f0;">
+  <p>Cargando ALMA…</p>
+  <p><a href="/alma-demo/" style="color: #1d9f75; font-weight: 600;">Entrar al tablero demo</a></p>
+</body>
+</html>

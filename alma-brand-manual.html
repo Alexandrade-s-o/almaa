@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALMA — Manual de Identidad Visual</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal-900: #04342C;
+    --teal-800: #085041;
+    --teal-600: #0F6E56;
+    --teal-400: #1D9E75;
+    --teal-200: #5DCAA5;
+    --teal-100: #9FE1CB;
+    --teal-50:  #E1F5EE;
+    --amber-400: #EF9F27;
+    --amber-100: #FAC775;
+    --amber-50:  #FAEEDA;
+    --gray-900: #1a1a18;
+    --gray-700: #3d3d3a;
+    --gray-400: #888780;
+    --gray-100: #D3D1C7;
+    --gray-50:  #F5F4F0;
+    --white: #ffffff;
+    --page-bg: #F8F7F3;
+    --font: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--page-bg);
+    color: var(--gray-900);
+    line-height: 1.6;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    background: var(--teal-800);
+    color: var(--white);
+    padding: 80px 60px 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .cover-badge {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal-100);
+    font-weight: 400;
+  }
+  .cover-title {
+    font-size: 52px;
+    font-weight: 300;
+    letter-spacing: 12px;
+    line-height: 1;
+  }
+  .cover-sub {
+    font-size: 14px;
+    color: var(--teal-100);
+    max-width: 480px;
+    line-height: 1.7;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 48px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    font-size: 12px;
+    color: var(--teal-200);
+  }
+  .cover-meta span strong {
+    display: block;
+    color: var(--white);
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+
+  /* ── Layout ── */
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 64px 48px;
+  }
+  .section { margin-bottom: 72px; }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal-400);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--teal-800);
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .body-text {
+    font-size: 15px;
+    color: var(--gray-700);
+    line-height: 1.8;
+    max-width: 660px;
+  }
+
+  /* ── Logo showcase ── */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .logo-box {
+    border-radius: 12px;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .logo-box.light { background: var(--white); border: 1px solid var(--gray-100); }
+  .logo-box.dark  { background: var(--teal-800); }
+  .logo-box.green { background: var(--teal-50); border: 1px solid var(--teal-100); }
+  .logo-box.dark-alt { background: var(--gray-900); }
+  .logo-box svg { width: 200px; height: auto; }
+  .logo-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gray-400);
+  }
+  .logo-box.dark .logo-label,
+  .logo-box.dark-alt .logo-label { color: rgba(255,255,255,0.4); }
+
+  /* ── Color palette ── */
+  .palette-section { margin-bottom: 40px; }
+  .palette-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-700);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 11px;
+  }
+  .swatches {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 96px;
+  }
+  .swatch-color {
+    height: 64px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .swatch-name {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gray-700);
+    line-height: 1.3;
+  }
+  .swatch-hex {
+    font-size: 11px;
+    color: var(--gray-400);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+  .swatch-role {
+    font-size: 10px;
+    color: var(--teal-400);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Typography ── */
+  .type-row {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--gray-100);
+    display: flex;
+    align-items: baseline;
+    gap: 40px;
+  }
+  .type-meta { width: 160px; flex-shrink: 0; }
+  .type-meta-name { font-size: 11px; font-weight: 500; color: var(--gray-700); text-transform: uppercase; letter-spacing: 1px; }
+  .type-meta-spec { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+  .type-sample { flex: 1; }
+
+  /* ── Usage rules ── */
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .rule-card {
+    border-radius: 10px;
+    padding: 20px 22px;
+    border: 1px solid var(--gray-100);
+    background: var(--white);
+  }
+  .rule-card.do { border-left: 3px solid var(--teal-400); }
+  .rule-card.dont { border-left: 3px solid #E24B4A; }
+  .rule-tag {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .rule-tag.do { color: var(--teal-400); }
+  .rule-tag.dont { color: #E24B4A; }
+  .rule-text { font-size: 13px; color: var(--gray-700); line-height: 1.6; }
+
+  /* ── Icon system ── */
+  .icon-row {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+  .icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .icon-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-label { font-size: 11px; color: var(--gray-400); text-align: center; }
+
+  /* ── Spacing ── */
+  .spacing-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .space-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .space-block { background: var(--teal-50); border: 1px solid var(--teal-100); }
+  .space-label { font-size: 11px; color: var(--gray-400); font-family: monospace; }
+
+  /* ── Footer ── */
+  .footer {
+    background: var(--teal-900);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 32px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .footer strong { color: var(--teal-200); }
+
+  /* ── Divider ── */
+  hr { border: none; border-top: 1px solid var(--gray-100); margin: 48px 0; }
+
+  /* ── Symbol breakdown ── */
+  .symbol-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .symbol-card {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: 10px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .symbol-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .symbol-name { font-size: 12px; font-weight: 500; color: var(--teal-800); margin-bottom: 4px; }
+  .symbol-desc { font-size: 11px; color: var(--gray-400); line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<!-- Cover -->
+<div class="cover">
+  <div class="cover-badge">Manual de Identidad Visual · Versión 1.0 · Abril 2026</div>
+  <div class="cover-title">ALMA</div>
+  <div class="cover-sub">
+    Inteligencia Multimodal Adaptativa para Agricultura Regenerativa Tropical.<br>
+    Este manual define el uso correcto de la marca ALMA en todos los contextos y soportes de comunicación.
+  </div>
+  <div class="cover-meta">
+    <span><strong>Proyecto</strong>Plataforma ALMA v4.0</span>
+    <span><strong>Región</strong>Cauca · Valle · Eje Cafetero</span>
+    <span><strong>Escala</strong>90,000 ha · 30,000 familias</span>
+    <span><strong>Autor</strong>Alfredo Márquez Z.</span>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- 1. Introducción -->
+  <div class="section">
+    <div class="section-label">01 — Sobre la marca</div>
+    <div class="section-title">La identidad de ALMA</div>
+    <p class="body-text">
+      ALMA es un sistema de inteligencia adaptativa que une biotecnología, sensórica masiva y aprendizaje automático para transformar la agricultura del suroccidente colombiano. Su identidad visual refleja esta dualidad fundamental: <strong>lo orgánico y lo digital, lo vivo y lo computacional</strong>.
+    </p>
+    <br>
+    <p class="body-text">
+      La hoja-circuito no es solo un símbolo decorativo — es una representación estructural del sistema: una planta cuyos nervios son datos, cuyos nodos son sensores, y cuya inteligencia fluye en tiempo real desde el suelo hasta la nube.
+    </p>
+  </div>
+
+  <!-- 2. Logo -->
+  <div class="section">
+    <div class="section-label">02 — Logotipo</div>
+    <div class="section-title">El símbolo y el wordmark</div>
+    <p class="body-text">
+      El logotipo de ALMA combina un símbolo circular (la hoja-circuito) con el wordmark en versalitas espaciadas. Ambos elementos trabajan juntos y pueden usarse de forma independiente en contextos específicos.
+    </p>
+
+    <div class="logo-grid">
+      <div class="logo-box light">
+        <svg viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="340" cy="185" r="112" fill="none" stroke="#1D9E75" stroke-width="1.5"/>
+          <circle cx="340" cy="185" r="100" fill="none" stroke="#9FE1CB" stroke-width="0.5" opacity="0.8"/>
+          <circle cx="452" cy="185" r="4" fill="#1D9E75"/><circle cx="419" cy="106" r="4" fill="#1D9E75"/><circle cx="340" cy="73" r="4" fill="#1D9E75"/><circle cx="261" cy="106" r="4" fill="#1D9E75"/><circle cx="228" cy="185" r="4" fill="#1D9E75"/><circle cx="261" cy="264" r="4" fill="#1D9E75"/><circle cx="340" cy="297" r="4" fill="#1D9E75"/><circle cx="419" cy="264" r="4" fill="#1D9E75"/>
+          <path d="M 340,90 C 295,110 262,148 262,188 C 262,228 295,264 340,282 C 385,264 418,228 418,188 C 418,148 385,110 340,90 Z" fill="#1D9E75"/>
+          <line x1="340" y1="96" x2="340" y2="278" stroke="white" stroke-width="1.2" opacity="0.65"/>
+          <line x1="340" y1="138" x2="298" y2="162" stroke="white" stroke-width="1" opacity="0.55"/><line x1="340" y1="138" x2="382" y2="162" stroke="white" stroke-width="1" opacity="0.55"/>
+          <line x1="340" y1="168" x2="283" y2="185" stroke="white" stroke-width="1" opacity="0.55"/><line x1="340" y1="168" x2="397" y2="185" stroke="white" stroke-width="1" opacity="0.55"/>
+          <line x1="340" y1="198" x2="288" y2="215" stroke="white" stroke-width="1" opacity="0.55"/><line x1="340" y1="198" x2="392" y2="215" stroke="white" stroke-width="1" opacity="0.55"/>
+          <line x1="340" y1="228" x2="302" y2="245" stroke="white" stroke-width="1" opacity="0.55"/><line x1="340" y1="228" x2="378" y2="245" stroke="white" stroke-width="1" opacity="0.55"/>
+          <circle cx="340" cy="90" r="4" fill="#EF9F27"/><circle cx="340" cy="138" r="4.5" fill="#EF9F27"/><circle cx="298" cy="162" r="3" fill="#EF9F27"/><circle cx="382" cy="162" r="3" fill="#EF9F27"/><circle cx="340" cy="168" r="4.5" fill="#EF9F27"/><circle cx="283" cy="185" r="3" fill="#EF9F27"/><circle cx="397" cy="185" r="3" fill="#EF9F27"/><circle cx="340" cy="198" r="4.5" fill="#EF9F27"/><circle cx="288" cy="215" r="3" fill="#EF9F27"/><circle cx="392" cy="215" r="3" fill="#EF9F27"/><circle cx="340" cy="228" r="4.5" fill="#EF9F27"/><circle cx="302" cy="245" r="3" fill="#EF9F27"/><circle cx="378" cy="245" r="3" fill="#EF9F27"/>
+          <text x="340" y="358" text-anchor="middle" font-family="system-ui,sans-serif" font-size="48" font-weight="500" letter-spacing="10" fill="#085041">ALMA</text>
+          <text x="340" y="386" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="400" letter-spacing="1.5" fill="#1D9E75">Agricultura Regenerativa Tropical</text>
+        </svg>
+        <div class="logo-label">Fondo blanco — uso principal</div>
+      </div>
+      <div class="logo-box dark">
+        <svg viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="340" cy="185" r="112" fill="none" stroke="#5DCAA5" stroke-width="1.5"/>
+          <circle cx="340" cy="185" r="100" fill="none" stroke="#1D9E75" stroke-width="0.5" opacity="0.8"/>
+          <circle cx="452" cy="185" r="4" fill="#5DCAA5"/><circle cx="419" cy="106" r="4" fill="#5DCAA5"/><circle cx="340" cy="73" r="4" fill="#5DCAA5"/><circle cx="261" cy="106" r="4" fill="#5DCAA5"/><circle cx="228" cy="185" r="4" fill="#5DCAA5"/><circle cx="261" cy="264" r="4" fill="#5DCAA5"/><circle cx="340" cy="297" r="4" fill="#5DCAA5"/><circle cx="419" cy="264" r="4" fill="#5DCAA5"/>
+          <path d="M 340,90 C 295,110 262,148 262,188 C 262,228 295,264 340,282 C 385,264 418,228 418,188 C 418,148 385,110 340,90 Z" fill="#5DCAA5"/>
+          <line x1="340" y1="96" x2="340" y2="278" stroke="#085041" stroke-width="1.2" opacity="0.65"/>
+          <line x1="340" y1="138" x2="298" y2="162" stroke="#085041" stroke-width="1" opacity="0.55"/><line x1="340" y1="138" x2="382" y2="162" stroke="#085041" stroke-width="1" opacity="0.55"/>
+          <line x1="340" y1="168" x2="283" y2="185" stroke="#085041" stroke-width="1" opacity="0.55"/><line x1="340" y1="168" x2="397" y2="185" stroke="#085041" stroke-width="1" opacity="0.55"/>
+          <line x1="340" y1="198" x2="288" y2="215" stroke="#085041" stroke-width="1" opacity="0.55"/><line x1="340" y1="198" x2="392" y2="215" stroke="#085041" stroke-width="1" opacity="0.55"/>
+          <line x1="340" y1="228" x2="302" y2="245" stroke="#085041" stroke-width="1" opacity="0.55"/><line x1="340" y1="228" x2="378" y2="245" stroke="#085041" stroke-width="1" opacity="0.55"/>
+          <circle cx="340" cy="90" r="4" fill="#EF9F27"/><circle cx="340" cy="138" r="4.5" fill="#EF9F27"/><circle cx="298" cy="162" r="3" fill="#EF9F27"/><circle cx="382" cy="162" r="3" fill="#EF9F27"/><circle cx="340" cy="168" r="4.5" fill="#EF9F27"/><circle cx="283" cy="185" r="3" fill="#EF9F27"/><circle cx="397" cy="185" r="3" fill="#EF9F27"/><circle cx="340" cy="198" r="4.5" fill="#EF9F27"/><circle cx="288" cy="215" r="3" fill="#EF9F27"/><circle cx="392" cy="215" r="3" fill="#EF9F27"/><circle cx="340" cy="228" r="4.5" fill="#EF9F27"/><circle cx="302" cy="245" r="3" fill="#EF9F27"/><circle cx="378" cy="245" r="3" fill="#EF9F27"/>
+          <text x="340" y="358" text-anchor="middle" font-family="system-ui,sans-serif" font-size="48" font-weight="500" letter-spacing="10" fill="#9FE1CB">ALMA</text>
+          <text x="340" y="386" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="400" letter-spacing="1.5" fill="#5DCAA5">Agricultura Regenerativa Tropical</text>
+        </svg>
+        <div class="logo-label">Fondo oscuro (teal-800)</div>
+      </div>
+      <div class="logo-box green">
+        <svg viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="340" cy="185" r="112" fill="none" stroke="#0F6E56" stroke-width="1.5"/>
+          <circle cx="340" cy="185" r="100" fill="none" stroke="#1D9E75" stroke-width="0.5" opacity="0.8"/>
+          <circle cx="452" cy="185" r="4" fill="#0F6E56"/><circle cx="419" cy="106" r="4" fill="#0F6E56"/><circle cx="340" cy="73" r="4" fill="#0F6E56"/><circle cx="261" cy="106" r="4" fill="#0F6E56"/><circle cx="228" cy="185" r="4" fill="#0F6E56"/><circle cx="261" cy="264" r="4" fill="#0F6E56"/><circle cx="340" cy="297" r="4" fill="#0F6E56"/><circle cx="419" cy="264" r="4" fill="#0F6E56"/>
+          <path d="M 340,90 C 295,110 262,148 262,188 C 262,228 295,264 340,282 C 385,264 418,228 418,188 C 418,148 385,110 340,90 Z" fill="#0F6E56"/>
+          <line x1="340" y1="96" x2="340" y2="278" stroke="white" stroke-width="1.2" opacity="0.65"/>
+          <line x1="340" y1="138" x2="298" y2="162" stroke="white" stroke-width="1" opacity="0.55"/><line x1="340" y1="138" x2="382" y2="162" stroke="white" stroke-width="1" opacity="0.55"/>
+          <line x1="340" y1="168" x2="283" y2="185" stroke="white" stroke-width="1" opacity="0.55"/><line x1="340" y1="168" x2="397" y2="185" stroke="white" stroke-width="1" opacity="0.55"/>
+          <line x1="340" y1="198" x2="288" y2="215" stroke="white" stroke-width="1" opacity="0.55"/><line x1="340" y1="198" x2="392" y2="215" stroke="white" stroke-width="1" opacity="0.55"/>
+          <line x1="340" y1="228" x2="302" y2="245" stroke="white" stroke-width="1" opacity="0.55"/><line x1="340" y1="228" x2="378" y2="245" stroke="white" stroke-width="1" opacity="0.55"/>
+          <circle cx="340" cy="90" r="4" fill="#EF9F27"/><circle cx="340" cy="138" r="4.5" fill="#EF9F27"/><circle cx="298" cy="162" r="3" fill="#EF9F27"/><circle cx="382" cy="162" r="3" fill="#EF9F27"/><circle cx="340" cy="168" r="4.5" fill="#EF9F27"/><circle cx="283" cy="185" r="3" fill="#EF9F27"/><circle cx="397" cy="185" r="3" fill="#EF9F27"/><circle cx="340" cy="198" r="4.5" fill="#EF9F27"/><circle cx="288" cy="215" r="3" fill="#EF9F27"/><circle cx="392" cy="215" r="3" fill="#EF9F27"/><circle cx="340" cy="228" r="4.5" fill="#EF9F27"/><circle cx="302" cy="245" r="3" fill="#EF9F27"/><circle cx="378" cy="245" r="3" fill="#EF9F27"/>
+          <text x="340" y="358" text-anchor="middle" font-family="system-ui,sans-serif" font-size="48" font-weight="500" letter-spacing="10" fill="#04342C">ALMA</text>
+          <text x="340" y="386" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="400" letter-spacing="1.5" fill="#0F6E56">Agricultura Regenerativa Tropical</text>
+        </svg>
+        <div class="logo-label">Fondo teal claro</div>
+      </div>
+      <div class="logo-box dark-alt">
+        <svg viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="340" cy="185" r="112" fill="none" stroke="#5DCAA5" stroke-width="1.5"/>
+          <circle cx="340" cy="185" r="100" fill="none" stroke="#1D9E75" stroke-width="0.5" opacity="0.6"/>
+          <circle cx="452" cy="185" r="4" fill="#5DCAA5"/><circle cx="419" cy="106" r="4" fill="#5DCAA5"/><circle cx="340" cy="73" r="4" fill="#5DCAA5"/><circle cx="261" cy="106" r="4" fill="#5DCAA5"/><circle cx="228" cy="185" r="4" fill="#5DCAA5"/><circle cx="261" cy="264" r="4" fill="#5DCAA5"/><circle cx="340" cy="297" r="4" fill="#5DCAA5"/><circle cx="419" cy="264" r="4" fill="#5DCAA5"/>
+          <path d="M 340,90 C 295,110 262,148 262,188 C 262,228 295,264 340,282 C 385,264 418,228 418,188 C 418,148 385,110 340,90 Z" fill="#1D9E75"/>
+          <line x1="340" y1="96" x2="340" y2="278" stroke="white" stroke-width="1.2" opacity="0.4"/>
+          <line x1="340" y1="138" x2="298" y2="162" stroke="white" stroke-width="1" opacity="0.35"/><line x1="340" y1="138" x2="382" y2="162" stroke="white" stroke-width="1" opacity="0.35"/>
+          <line x1="340" y1="168" x2="283" y2="185" stroke="white" stroke-width="1" opacity="0.35"/><line x1="340" y1="168" x2="397" y2="185" stroke="white" stroke-width="1" opacity="0.35"/>
+          <line x1="340" y1="198" x2="288" y2="215" stroke="white" stroke-width="1" opacity="0.35"/><line x1="340" y1="198" x2="392" y2="215" stroke="white" stroke-width="1" opacity="0.35"/>
+          <line x1="340" y1="228" x2="302" y2="245" stroke="white" stroke-width="1" opacity="0.35"/><line x1="340" y1="228" x2="378" y2="245" stroke="white" stroke-width="1" opacity="0.35"/>
+          <circle cx="340" cy="90" r="4" fill="#FAC775"/><circle cx="340" cy="138" r="4.5" fill="#FAC775"/><circle cx="298" cy="162" r="3" fill="#FAC775"/><circle cx="382" cy="162" r="3" fill="#FAC775"/><circle cx="340" cy="168" r="4.5" fill="#FAC775"/><circle cx="283" cy="185" r="3" fill="#FAC775"/><circle cx="397" cy="185" r="3" fill="#FAC775"/><circle cx="340" cy="198" r="4.5" fill="#FAC775"/><circle cx="288" cy="215" r="3" fill="#FAC775"/><circle cx="392" cy="215" r="3" fill="#FAC775"/><circle cx="340" cy="228" r="4.5" fill="#FAC775"/><circle cx="302" cy="245" r="3" fill="#FAC775"/><circle cx="378" cy="245" r="3" fill="#FAC775"/>
+          <text x="340" y="358" text-anchor="middle" font-family="system-ui,sans-serif" font-size="48" font-weight="500" letter-spacing="10" fill="#9FE1CB">ALMA</text>
+          <text x="340" y="386" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="400" letter-spacing="1.5" fill="#5DCAA5">Agricultura Regenerativa Tropical</text>
+        </svg>
+        <div class="logo-label">Fondo negro — gala / premium</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Anatomía del símbolo -->
+  <div class="section">
+    <div class="section-label">03 — Anatomía</div>
+    <div class="section-title">Los elementos del símbolo</div>
+    <div class="symbol-grid">
+      <div class="symbol-card">
+        <div class="symbol-icon" style="background:#E1F5EE">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="#1D9E75" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="symbol-name">Anillo externo</div>
+        <div class="symbol-desc">El sistema completo: 90,000 ha y su ciclo de datos cerrado</div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-icon" style="background:#E1F5EE">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3 C9 5 7 8 7 12 C7 16 9 19 12 21 C15 19 17 16 17 12 C17 8 15 5 12 3 Z" fill="#1D9E75"/>
+          </svg>
+        </div>
+        <div class="symbol-name">La hoja</div>
+        <div class="symbol-desc">Vida, naturaleza y la biodiversidad del suroccidente colombiano</div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-icon" style="background:#E1F5EE">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <line x1="12" y1="4" x2="12" y2="20" stroke="white" stroke-width="1.5"/>
+            <line x1="12" y1="9" x2="8" y2="12" stroke="white" stroke-width="1"/>
+            <line x1="12" y1="9" x2="16" y2="12" stroke="white" stroke-width="1"/>
+            <rect x="0" y="0" width="24" height="24" fill="#1D9E75" rx="12" style="z-index:-1"/>
+          </svg>
+        </div>
+        <div class="symbol-name">Venas-circuito</div>
+        <div class="symbol-desc">Los 45,000 sensores IoT y el flujo de datos en tiempo real</div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-icon" style="background:#FAEEDA">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5" fill="#EF9F27"/>
+            <circle cx="12" cy="6" r="2.5" fill="#EF9F27"/>
+            <circle cx="6" cy="12" r="2.5" fill="#EF9F27"/>
+            <circle cx="18" cy="12" r="2.5" fill="#EF9F27"/>
+          </svg>
+        </div>
+        <div class="symbol-name">Nodos ámbar</div>
+        <div class="symbol-desc">Puntos de decisión: donde los datos se convierten en inteligencia</div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-icon" style="background:#FAEEDA">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <circle cx="12" cy="4" r="2.5" fill="#EF9F27"/>
+          </svg>
+        </div>
+        <div class="symbol-name">Ápice ámbar</div>
+        <div class="symbol-desc">La inteligencia en su punto más alto: el modelo RL que optimiza el futuro</div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-icon" style="background:#E1F5EE">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="#1D9E75" stroke-width="1.2"/>
+            <circle cx="22" cy="12" r="2" fill="#1D9E75"/>
+            <circle cx="2"  cy="12" r="2" fill="#1D9E75"/>
+            <circle cx="12" cy="2"  r="2" fill="#1D9E75"/>
+            <circle cx="12" cy="22" r="2" fill="#1D9E75"/>
+          </svg>
+        </div>
+        <div class="symbol-name">8 puntos cardinales</div>
+        <div class="symbol-desc">Los 8 secuenciadores MinION y las 8 subregiones de intervención</div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-icon" style="background:#E1F5EE">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="8" fill="none" stroke="#9FE1CB" stroke-width="0.8"/>
+            <circle cx="12" cy="12" r="10" fill="none" stroke="#1D9E75" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="symbol-name">Anillo interior</div>
+        <div class="symbol-desc">La red LoRaWAN: la membrana que conecta el campo con el edge</div>
+      </div>
+      <div class="symbol-card">
+        <div class="symbol-icon" style="background:#F1EFE8">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <text x="2" y="17" font-family="system-ui" font-size="11" font-weight="500" fill="#085041" letter-spacing="2">ALMA</text>
+          </svg>
+        </div>
+        <div class="symbol-name">Wordmark</div>
+        <div class="symbol-desc">Versalitas espaciadas. Nunca se distorsiona ni se cambia la fuente</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Paleta de colores -->
+  <div class="section">
+    <div class="section-label">04 — Paleta de colores</div>
+    <div class="section-title">Sistema de color</div>
+
+    <div class="palette-section">
+      <div class="palette-title">Primarios — Familia Teal (naturaleza · tecnología · confianza)</div>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch-color" style="background:#04342C"></div>
+          <div class="swatch-name">Teal 900</div>
+          <div class="swatch-hex">#04342C</div>
+          <div class="swatch-role">Textos premium</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#085041"></div>
+          <div class="swatch-name">Teal 800</div>
+          <div class="swatch-hex">#085041</div>
+          <div class="swatch-role">Wordmark · Cover</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#0F6E56"></div>
+          <div class="swatch-name">Teal 600</div>
+          <div class="swatch-hex">#0F6E56</div>
+          <div class="swatch-role">Botones activos</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#1D9E75"></div>
+          <div class="swatch-name">Teal 400 ★</div>
+          <div class="swatch-hex">#1D9E75</div>
+          <div class="swatch-role">COLOR PRINCIPAL</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#5DCAA5"></div>
+          <div class="swatch-name">Teal 200</div>
+          <div class="swatch-hex">#5DCAA5</div>
+          <div class="swatch-role">Tagline · estados</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#9FE1CB; border:1px solid #5DCAA5;"></div>
+          <div class="swatch-name">Teal 100</div>
+          <div class="swatch-hex">#9FE1CB</div>
+          <div class="swatch-role">Anillo interior</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#E1F5EE; border:1px solid #9FE1CB;"></div>
+          <div class="swatch-name">Teal 50</div>
+          <div class="swatch-hex">#E1F5EE</div>
+          <div class="swatch-role">Fondos suaves</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="palette-section">
+      <div class="palette-title">Acento — Familia Ámbar (datos · decisión · inteligencia activa)</div>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch-color" style="background:#633806"></div>
+          <div class="swatch-name">Ámbar 800</div>
+          <div class="swatch-hex">#633806</div>
+          <div class="swatch-role">Texto sobre ámbar</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#BA7517"></div>
+          <div class="swatch-name">Ámbar 600</div>
+          <div class="swatch-hex">#BA7517</div>
+          <div class="swatch-role">Bordes acento</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#EF9F27"></div>
+          <div class="swatch-name">Ámbar 400 ★</div>
+          <div class="swatch-hex">#EF9F27</div>
+          <div class="swatch-role">NODOS SENSOR</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#FAC775"></div>
+          <div class="swatch-name">Ámbar 100</div>
+          <div class="swatch-hex">#FAC775</div>
+          <div class="swatch-role">Nodos modo oscuro</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#FAEEDA; border:1px solid #FAC775;"></div>
+          <div class="swatch-name">Ámbar 50</div>
+          <div class="swatch-hex">#FAEEDA</div>
+          <div class="swatch-role">Fondos alerta</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="palette-section">
+      <div class="palette-title">Neutros — Sistema de grises (estructura · tipografía · UI)</div>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch-color" style="background:#1a1a18"></div>
+          <div class="swatch-name">Gris 900</div>
+          <div class="swatch-hex">#1A1A18</div>
+          <div class="swatch-role">Fondo premium</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#3d3d3a"></div>
+          <div class="swatch-name">Gris 700</div>
+          <div class="swatch-hex">#3D3D3A</div>
+          <div class="swatch-role">Cuerpo de texto</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#888780"></div>
+          <div class="swatch-name">Gris 400</div>
+          <div class="swatch-hex">#888780</div>
+          <div class="swatch-role">Texto secundario</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#D3D1C7; border:1px solid #b4b2a9;"></div>
+          <div class="swatch-name">Gris 100</div>
+          <div class="swatch-hex">#D3D1C7</div>
+          <div class="swatch-role">Bordes y divisores</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#F5F4F0; border:1px solid #D3D1C7;"></div>
+          <div class="swatch-name">Gris 50</div>
+          <div class="swatch-hex">#F5F4F0</div>
+          <div class="swatch-role">Fondo de página</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="palette-section">
+      <div class="palette-title">Semánticos — Alertas y estados del sistema</div>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch-color" style="background:#22C55E"></div>
+          <div class="swatch-name">Éxito</div>
+          <div class="swatch-hex">#22C55E</div>
+          <div class="swatch-role">Cultivo óptimo</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#EF9F27"></div>
+          <div class="swatch-name">Advertencia</div>
+          <div class="swatch-hex">#EF9F27</div>
+          <div class="swatch-role">Alerta fitosanitaria</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#E24B4A"></div>
+          <div class="swatch-name">Peligro</div>
+          <div class="swatch-hex">#E24B4A</div>
+          <div class="swatch-role">Emergencia / deriva</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#378ADD"></div>
+          <div class="swatch-name">Información</div>
+          <div class="swatch-hex">#378ADD</div>
+          <div class="swatch-role">Datos / métricas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Tipografía -->
+  <div class="section">
+    <div class="section-label">05 — Tipografía</div>
+    <div class="section-title">Sistema tipográfico</div>
+    <p class="body-text">ALMA usa tipografía del sistema (system-ui) como fuente principal, garantizando legibilidad en todos los dispositivos del campo sin dependencia de fuentes externas. Para materiales premium se recomienda <strong>Inter</strong> o <strong>DM Sans</strong>.</p>
+
+    <div style="margin-top:32px">
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-meta-name">Display</div>
+          <div class="type-meta-spec">52px · weight 300 · tracking +12</div>
+        </div>
+        <div class="type-sample" style="font-size:52px; font-weight:300; letter-spacing:12px; color:#085041; line-height:1;">ALMA</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-meta-name">Encabezado 1</div>
+          <div class="type-meta-spec">28px · weight 400</div>
+        </div>
+        <div class="type-sample" style="font-size:28px; font-weight:400; color:#085041;">Agricultura Regenerativa Tropical</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-meta-name">Encabezado 2</div>
+          <div class="type-meta-spec">20px · weight 500</div>
+        </div>
+        <div class="type-sample" style="font-size:20px; font-weight:500; color:#3d3d3a;">Sistema Adaptativo de Control Cerrado</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-meta-name">Cuerpo</div>
+          <div class="type-meta-spec">15px · weight 400 · leading 1.8</div>
+        </div>
+        <div class="type-sample" style="font-size:15px; color:#3d3d3a; line-height:1.8;">La Plataforma ALMA opera como un Proceso de Decisión de Markov donde el estado del sistema agrícola es continuamente observado por 45,000 sensores y analizado por inteligencia artificial.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-meta-name">Etiqueta</div>
+          <div class="type-meta-spec">11px · weight 500 · uppercase · tracking +2</div>
+        </div>
+        <div class="type-sample" style="font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:2px; color:#1D9E75;">Cauca · Valle del Cauca · Eje Cafetero</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="type-meta-name">Código / Datos</div>
+          <div class="type-meta-spec">13px · monospace</div>
+        </div>
+        <div class="type-sample" style="font-size:13px; font-family:'SF Mono','Fira Code',monospace; color:#085041;">NDVI: 0.72 · pH: 6.4 · Humedad: 38% · T°: 24.5°C</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Reglas de uso -->
+  <div class="section">
+    <div class="section-label">06 — Reglas de uso</div>
+    <div class="section-title">Qué hacer y qué evitar</div>
+    <div class="rules-grid">
+      <div class="rule-card do">
+        <div class="rule-tag do">Correcto</div>
+        <div class="rule-text">Usar el logo sobre fondos blancos, teal oscuro, teal claro o negro. Mantener la zona de exclusión mínima de 1x (donde x = altura del wordmark).</div>
+      </div>
+      <div class="rule-card dont">
+        <div class="rule-tag dont">Incorrecto</div>
+        <div class="rule-text">No usar el logo sobre fotografías sin un fondo sólido debajo. No reducir el logo a menos de 24px de altura.</div>
+      </div>
+      <div class="rule-card do">
+        <div class="rule-tag do">Correcto</div>
+        <div class="rule-text">El símbolo puede usarse solo (sin wordmark) en iconos de app, favicons y sellos de certificación a partir de 32×32px.</div>
+      </div>
+      <div class="rule-card dont">
+        <div class="rule-tag dont">Incorrecto</div>
+        <div class="rule-text">No deformar, rotar, recolorear ni agregar efectos al logo. No separar los nodos ámbar del símbolo.</div>
+      </div>
+      <div class="rule-card do">
+        <div class="rule-tag do">Correcto</div>
+        <div class="rule-text">Usar el color primario Teal 400 (#1D9E75) y el acento Ámbar 400 (#EF9F27) como los únicos colores de marca en materiales oficiales.</div>
+      </div>
+      <div class="rule-card dont">
+        <div class="rule-tag dont">Incorrecto</div>
+        <div class="rule-text">No cambiar la tipografía del wordmark "ALMA". No sustituir el ámbar de los nodos por otro color de acento.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Zona de exclusión -->
+  <div class="section">
+    <div class="section-label">07 — Espaciado</div>
+    <div class="section-title">Zona de exclusión mínima</div>
+    <p class="body-text">Siempre debe existir un espacio libre alrededor del logo equivalente a la altura de la letra "A" del wordmark. Ningún elemento (texto, imagen, borde) puede invadir esta zona.</p>
+    <div style="margin-top:32px; background:white; border:1px solid var(--gray-100); border-radius:12px; padding:40px; display:inline-block;">
+      <div style="border:2px dashed #EF9F27; padding:24px; display:inline-block; border-radius:4px;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <svg viewBox="0 0 340 210" width="200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="170" cy="92" r="56" fill="none" stroke="#1D9E75" stroke-width="1.2"/>
+            <circle cx="170" cy="92" r="50" fill="none" stroke="#9FE1CB" stroke-width="0.5" opacity="0.8"/>
+            <circle cx="226" cy="92" r="2" fill="#1D9E75"/><circle cx="210" cy="53" r="2" fill="#1D9E75"/><circle cx="170" cy="36" r="2" fill="#1D9E75"/><circle cx="130" cy="53" r="2" fill="#1D9E75"/><circle cx="114" cy="92" r="2" fill="#1D9E75"/><circle cx="130" cy="131" r="2" fill="#1D9E75"/><circle cx="170" cy="148" r="2" fill="#1D9E75"/><circle cx="210" cy="131" r="2" fill="#1D9E75"/>
+            <path d="M 170,45 C 148,55 131,74 131,94 C 131,114 148,132 170,141 C 192,132 209,114 209,94 C 209,74 192,55 170,45 Z" fill="#1D9E75"/>
+            <line x1="170" y1="48" x2="170" y2="139" stroke="white" stroke-width="0.8" opacity="0.65"/>
+            <line x1="170" y1="69" x2="149" y2="81" stroke="white" stroke-width="0.6" opacity="0.55"/><line x1="170" y1="69" x2="191" y2="81" stroke="white" stroke-width="0.6" opacity="0.55"/>
+            <line x1="170" y1="84" x2="141" y2="93" stroke="white" stroke-width="0.6" opacity="0.55"/><line x1="170" y1="84" x2="199" y2="93" stroke="white" stroke-width="0.6" opacity="0.55"/>
+            <line x1="170" y1="99" x2="144" y2="108" stroke="white" stroke-width="0.6" opacity="0.55"/><line x1="170" y1="99" x2="196" y2="108" stroke="white" stroke-width="0.6" opacity="0.55"/>
+            <line x1="170" y1="114" x2="151" y2="123" stroke="white" stroke-width="0.6" opacity="0.55"/><line x1="170" y1="114" x2="189" y2="123" stroke="white" stroke-width="0.6" opacity="0.55"/>
+            <circle cx="170" cy="45" r="2" fill="#EF9F27"/><circle cx="170" cy="69" r="2.5" fill="#EF9F27"/><circle cx="149" cy="81" r="1.5" fill="#EF9F27"/><circle cx="191" cy="81" r="1.5" fill="#EF9F27"/><circle cx="170" cy="84" r="2.5" fill="#EF9F27"/><circle cx="141" cy="93" r="1.5" fill="#EF9F27"/><circle cx="199" cy="93" r="1.5" fill="#EF9F27"/><circle cx="170" cy="99" r="2.5" fill="#EF9F27"/><circle cx="144" cy="108" r="1.5" fill="#EF9F27"/><circle cx="196" cy="108" r="1.5" fill="#EF9F27"/><circle cx="170" cy="114" r="2.5" fill="#EF9F27"/><circle cx="151" cy="123" r="1.5" fill="#EF9F27"/><circle cx="189" cy="123" r="1.5" fill="#EF9F27"/>
+            <text x="170" y="179" text-anchor="middle" font-family="system-ui,sans-serif" font-size="24" font-weight="500" letter-spacing="5" fill="#085041">ALMA</text>
+            <text x="170" y="193" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" font-weight="400" letter-spacing="0.8" fill="#1D9E75">Agricultura Regenerativa Tropical</text>
+          </svg>
+        </div>
+      </div>
+      <div style="font-size:11px;color:#888780;margin-top:12px;text-align:center;">Zona de exclusión mínima (línea ámbar)</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <strong>ALMA</strong> — Manual de Identidad Visual v1.0 · Abril 2026 · Alfredo Márquez Z. · Confidencial
+</div>
+
+</body>
+</html>

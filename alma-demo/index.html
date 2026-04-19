@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALMA | Dashboard Neuralzoo SPA</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="logo-container">
+            <img src="../alma_logo.svg" alt="ALMA" style="width: 100%; filter: drop-shadow(0 2px 10px rgba(8, 80, 65, 0.12));">
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item active" data-view="dashboard">
+                <i class="fa-solid fa-chart-pie"></i>
+                Dashboard Global
+            </li>
+            <li class="nav-item" data-view="uaf">
+                <i class="fa-solid fa-leaf"></i>
+                Gestión UAF
+            </li>
+            <li class="nav-item" data-view="lora">
+                <i class="fa-solid fa-microchip"></i>
+                Nodos LoRaWAN
+            </li>
+            <li class="nav-item" data-view="minion">
+                <i class="fa-solid fa-dna"></i>
+                Secuenciación MinION
+            </li>
+            <li class="nav-item" data-view="carbon">
+                <i class="fa-solid fa-cloud"></i>
+                Créditos Carbono
+            </li>
+            <li class="nav-item nav-item--config" data-view="config">
+                <i class="fa-solid fa-gear"></i>
+                Configuración
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-title">
+                <h1 id="view-title">Neuralzoo Command Center</h1>
+                <p id="view-subtitle">Plataforma Integral de Agricultura Regenerativa</p>
+            </div>
+            <div class="system-status">
+                <div class="status-indicator"></div>
+                <span id="demo-mode-badge">Modo demo · datos locales</span>
+            </div>
+        </header>
+
+        <!-- Dynamic Views Container -->
+        <div id="dynamic-content">
+            
+            <!-- VIEW: DASHBOARD (Default) -->
+            <div id="view-dashboard" class="app-view">
+                <div class="stats-grid">
+                    <div class="glass-card">
+                        <div class="stat-header"><span>Sensores Activos</span> <i class="fa-solid fa-wifi"></i></div>
+                        <div class="stat-value"><span id="kpi-sensors">0</span> <span class="stat-unit">nodos</span></div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-header"><span>Área Cultivada</span> <i class="fa-solid fa-map"></i></div>
+                        <div class="stat-value"><span id="kpi-area">0</span> <span class="stat-unit">ha</span></div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-header"><span>Mat. Orgánica</span> <i class="fa-solid fa-flask"></i></div>
+                        <div class="stat-value"><span id="kpi-mos">0</span> <span class="stat-unit">%</span></div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-header"><span>Humedad Promedio</span> <i class="fa-solid fa-droplet"></i></div>
+                        <div class="stat-value"><span id="kpi-water">0</span> <span class="stat-unit">%</span></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="data-column">
+                        <div class="glass-card" style="margin-bottom: 1.5rem;">
+                            <h2 class="section-title"><i class="fa-solid fa-chart-line"></i> Análisis de la demo (lotes ejemplo)</h2>
+                            <div class="chart-container">
+                                <canvas id="mainChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="glass-card">
+                            <h2 class="section-title"><i class="fa-solid fa-table"></i> Estado de Lotes (UAF)</h2>
+                            <div class="data-table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>ID Lote</th>
+                                            <th>Cultivo</th>
+                                            <th>Humedad</th>
+                                            <th>NDVI</th>
+                                            <th>Estado Neuralzoo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="uaf-table-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ai-column">
+                        <div class="glass-card ai-section">
+                            <h2 class="section-title"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--teal-400)"></i> Agente ALMA (diagnóstico)</h2>
+                            <button id="btn-gemini-analyze" class="ai-button">Generar Diagnóstico</button>
+                            <div id="ai-response-container" class="ai-insights">
+                                <div class="insight-card">Inicie el análisis para obtener predicciones del agente Neuralzoo.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: UAF (Gestión detallada) -->
+            <div id="view-uaf" class="app-view" style="display:none;">
+                <div class="glass-card intro-banner">
+                    <h2 class="section-title"><i class="fa-solid fa-leaf"></i> Gestión de Unidades Agrícolas de Funcionamiento (UAF)</h2>
+                    <p class="muted">Seguimiento ficticio por lote; mismos datos de ejemplo que el tablero global.</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="glass-card">
+                        <div class="stat-header"><span>Lotes activos</span> <i class="fa-solid fa-map-location-dot"></i></div>
+                        <div class="stat-value"><span id="uaf-kpi-lotes">0</span> <span class="stat-unit">registrados</span></div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-header"><span>NDVI medio red</span> <i class="fa-solid fa-seedling"></i></div>
+                        <div class="stat-value"><span id="uaf-kpi-ndvi">0</span> <span class="stat-unit">índice</span></div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-header"><span>Riego / alertas</span> <i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div class="stat-value"><span id="uaf-kpi-alerts">0</span> <span class="stat-unit">lotes bajo umbral</span></div>
+                    </div>
+                </div>
+                <div class="two-col">
+                    <div class="glass-card">
+                        <h2 class="section-title"><i class="fa-solid fa-chart-area"></i> Tendencia humedad vs vigor</h2>
+                        <div class="chart-container chart-tall">
+                            <canvas id="uafTrendChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="glass-card">
+                        <h2 class="section-title"><i class="fa-solid fa-list-ul"></i> Prioridad operativa</h2>
+                        <ul id="uaf-priority-list" class="priority-list"></ul>
+                    </div>
+                </div>
+                <div class="glass-card" style="margin-top:1.5rem;">
+                    <h2 class="section-title"><i class="fa-solid fa-table-list"></i> Ficha por lote</h2>
+                    <div class="data-table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Cultivo</th>
+                                    <th>Humedad</th>
+                                    <th>MOS %</th>
+                                    <th>NDVI</th>
+                                    <th>Prioridad</th>
+                                </tr>
+                            </thead>
+                            <tbody id="uaf-detail-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: LoRaWAN -->
+            <div id="view-lora" class="app-view" style="display:none;">
+                <div class="glass-card intro-banner" style="border-left-color:var(--amber-600);">
+                    <h2 class="section-title"><i class="fa-solid fa-microchip"></i> Red de nodos LoRaWAN</h2>
+                    <p class="muted">Gateway Neuralzoo + sensores de campo: humedad de suelo, temperatura y batería (demo demostrable).</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="glass-card">
+                        <div class="stat-header">Nodos online</div>
+                        <div class="stat-value"><span id="lora-online">24</span> <span class="stat-unit">/ 26</span></div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-header">RSSI medio uplink</div>
+                        <div class="stat-value"><span id="lora-rssi">-97</span> <span class="stat-unit">dBm</span></div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-header">Paquetes últimas 24h</div>
+                        <div class="stat-value"><span id="lora-packets">18.4k</span></div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-header">Batería mínima red</div>
+                        <div class="stat-value"><span id="lora-batt">72</span> <span class="stat-unit">%</span></div>
+                    </div>
+                </div>
+                <div class="two-col">
+                    <div class="glass-card">
+                        <h2 class="section-title"><i class="fa-solid fa-signal"></i> Calidad de enlace por nodo</h2>
+                        <div class="chart-container chart-tall">
+                            <canvas id="loraRssiChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="glass-card">
+                        <h2 class="section-title"><i class="fa-solid fa-server"></i> Inventario de nodos</h2>
+                        <div class="data-table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>EUI</th>
+                                        <th>Zona UAF</th>
+                                        <th>Último RSSI</th>
+                                        <th>Bat.</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="lora-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: CARBON -->
+            <div id="view-carbon" class="app-view" style="display:none;">
+                <div class="glass-card ai-section" style="margin-bottom: 2rem; border-left-color: var(--teal-400);">
+                    <h2 class="section-title"><i class="fa-solid fa-cloud"></i> Mercado de Créditos de Carbono (VM0017)</h2>
+                    <p class="muted">Monitoreo de secuestro y reducción de emisiones de CO₂e basado en el estándar Verra.</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="glass-card">
+                        <div class="stat-header">CO₂ Evitado Acumulado</div>
+                        <div class="stat-value">1.52M <span class="stat-unit">tCO₂e</span></div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-header">Precio Spot Carbono</div>
+                        <div class="stat-value">$22.40 <span class="stat-unit">USD</span></div>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-header">Valor Bruto Portafolio</div>
+                        <div class="stat-value">$34.1M <span class="stat-unit">USD</span></div>
+                    </div>
+                </div>
+                <div class="glass-card" style="margin-top:2rem;">
+                    <h2 class="section-title"><i class="fa-solid fa-magnifying-glass-chart"></i> Proyección de Captura 10 Años</h2>
+                    <div class="chart-container">
+                        <canvas id="carbonChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: MINION DNA -->
+            <div id="view-minion" class="app-view" style="display:none;">
+                <div class="glass-card intro-banner" style="margin-bottom: 2rem;">
+                    <h2 class="section-title"><i class="fa-solid fa-dna"></i> Secuenciación Genómica Nanoporíca In-Situ</h2>
+                    <p class="muted">Detección de patógenos y análisis de microbiomas de suelo (Cauca-Valle-Eje).</p>
+                </div>
+                <div class="glass-card">
+                    <h2 class="section-title"><i class="fa-solid fa-list-check"></i> Registro de Diagnósticos</h2>
+                    <div class="data-table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID Muestra</th>
+                                    <th>Región</th>
+                                    <th>Tipo</th>
+                                    <th>Resultado</th>
+                                    <th>Confianza</th>
+                                </tr>
+                            </thead>
+                            <tbody id="minion-table-body">
+                                <tr><td>DNA-0422</td><td>Cauca</td><td>Microbioma</td><td style="color:var(--success)">Diversidad óptima</td><td>99.2%</td></tr>
+                                <tr><td>DNA-0423</td><td>Valle</td><td>Patógeno</td><td style="color:var(--danger)">Positivo Fusarium</td><td>97.5%</td></tr>
+                                <tr><td>DNA-0424</td><td>Eje Cafetero</td><td>Genotipo</td><td>Var. Seleccionada</td><td>99.9%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="glass-card" style="margin-top:1.5rem;">
+                    <h2 class="section-title"><i class="fa-solid fa-chart-column"></i> Lecturas por tipo de análisis (últimos 30 días)</h2>
+                    <div class="chart-container">
+                        <canvas id="minionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: CONFIGURACIÓN -->
+            <div id="view-config" class="app-view" style="display:none;">
+                <div class="glass-card intro-banner" style="border-left-color:var(--gris-400);">
+                    <h2 class="section-title"><i class="fa-solid fa-gear"></i> Configuración ALMA</h2>
+                    <p class="muted">Todo lo que ves es ficticio y vive en el navegador: sirve para presentar la idea, no para operar un campo real.</p>
+                </div>
+                <div class="config-grid">
+                    <div class="glass-card">
+                        <h2 class="section-title"><i class="fa-solid fa-flask"></i> Esta versión</h2>
+                        <div class="config-row">
+                            <span>Origen de los datos</span>
+                            <span class="pill pill-ok">Demo local</span>
+                        </div>
+                        <div class="config-row">
+                            <span>Backend / base de datos</span>
+                            <span class="pill pill-warn">No usa</span>
+                        </div>
+                        <p class="config-hint">Abre <code>index.html</code> y navega: no hace falta instalar nada ni configurar claves.</p>
+                    </div>
+                    <div class="glass-card">
+                        <h2 class="section-title"><i class="fa-solid fa-sliders"></i> Umbrales UAF</h2>
+                        <div class="config-row">
+                            <label for="cfg-humedad">Alerta humedad mínima (%)</label>
+                            <input type="number" id="cfg-humedad" class="config-input" value="20" min="5" max="50" />
+                        </div>
+                        <div class="config-row">
+                            <label for="cfg-ndvi">NDVI referencia mínimo</label>
+                            <input type="number" id="cfg-ndvi" class="config-input" value="0.45" step="0.01" min="0" max="1" />
+                        </div>
+                        <button type="button" id="btn-save-thresholds" class="ai-button" style="margin-top:1rem;">Aplicar umbrales al tablero</button>
+                    </div>
+                </div>
+                <div class="glass-card" style="margin-top:1.5rem;">
+                    <h2 class="section-title"><i class="fa-solid fa-circle-info"></i> Sobre el diagnóstico</h2>
+                    <p class="muted config-hint">El botón de diagnóstico aplica reglas simples sobre los lotes de ejemplo (humedad y NDVI). No llama a ningún servicio de IA externo.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
